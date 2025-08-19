@@ -1,0 +1,458 @@
+ <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <TITLE>PharmaClik Chat</TITLE>
+            <apex:slds />
+            
+            <script type='text/javascript' src='https://mckesson--miaw.sandbox.my.site.com/ESWMessagingChannelEngl1752488521699/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'>
+            </script>
+            <script type='text/javascript'>
+            function initEmbeddedMessaging() {               
+                try {
+                    console.log("getting in from initembedded messaging");
+                    embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+                    embeddedservice_bootstrap.settings.hideChatButtonOnLoad = true;
+                    embeddedservice_bootstrap.init(
+                        '00DDE0000044RBg',
+                        'Messaging_Channel_English',
+                        'https://mckesson--miaw.sandbox.my.site.com/ESWMessagingChannelEngl1752488521699',
+                        {
+                            scrt2URL: 'https://mckesson--miaw.sandbox.my.salesforce-scrt.com'
+                        }
+                    );
+                } catch (err) {
+                    console.error('Error loading Embedded Messaging: ', err);
+                }
+                console.log("getting out from initembedded messaging");
+            };
+            </script>
+             <script type='text/javascript'>
+            var openedLiveChatWindows = {};        
+            var chatFormValues = new Array();
+            var selectedChatTopic;
+            
+            var isBusinessHrs=false;
+            
+            // Populate chat topic object in chatFormValues array We will retreive from this array the passed objecty to retrieve  the right paramters to send to salesForce server
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Information Service";
+            chatFormVal.cause = "AA packouts Return Process";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["8"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Document Services";
+            chatFormVal.cause = "Customer Communication";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["25"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Ordering Service";
+            chatFormVal.cause = "Delete Order";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["23"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Information Service";
+            chatFormVal.cause = "Delivery Days Inquiry";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["3"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Ordering Service";
+            chatFormVal.cause = "Delivery ETA";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["2"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Document Services";
+            chatFormVal.cause = "Credit Memo/Invoice";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["1"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Ordering Service";
+            chatFormVal.cause = "Modify Order";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["22"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Technical Services";
+            chatFormVal.cause = "Pharmaclik Order Unlock";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["4"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Customer Experience Management";
+            chatFormVal.cause = "PharmaClik Feedback/Enhancement";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["5"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Technical Services";
+            chatFormVal.cause = "PharmaClik Support Training Accepted";
+            chatFormVal.subcause = "Chat";
+            chatFormVal.chat = "Y";
+            chatFormValues["6"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Ordering Service";
+            chatFormVal.cause = "Place Order";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["21"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Document Services";
+            chatFormVal.cause = "Price stickers";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["26"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Document Services";
+            chatFormVal.cause = "Return Paper Work";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["27"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Information Service";
+            chatFormVal.cause = "Return Policy Inquiry";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["7"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Return Services";
+            chatFormVal.cause = "Return Status follow up";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["24"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Document Services";
+            chatFormVal.cause = "POD";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["28"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Document Services";
+            chatFormVal.cause = "Statement";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["29"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = "Product Information";
+            chatFormVal.cause = "Stock Availability";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "Y";
+            chatFormValues["9"] = chatFormVal; 
+            
+            chatFormVal = new Object();		
+            chatFormVal.reason = " ";
+            chatFormVal.cause = " ";
+            chatFormVal.subcause = "";
+            chatFormVal.chat = "N";
+            chatFormValues["10"] = chatFormVal; 
+            
+              
+           function prepareChatParams(selectedChatTopic) {
+                    window.addEventListener("onEmbeddedMessagingReady",()=>{
+                    console.log("Recieved Messaging Event--- inside onEmbeddedMessagingReady");
+                    var lang="English";    
+                    var sapAccount = "7005201"; 
+                    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                    "Language":lang,
+                    "SAPAccount":sapAccount,
+                    "Contact_Name_c": "pharma demo",
+                    "AccountRecordType": "01236000001DnoVAAS",
+                    "CaseRecordType":"0121R000000P4K7QAK",
+                    "Case_Region_c": "National",
+                    "Origin": "PharmaClik Chat",
+                    "Status": "New",
+                    "Priority": "Medium",
+                    "Subject":"PharmaClik Chat",
+                    "WebsiteName": "PharmaClik",
+                    "CaseReason" :selectedChatTopic.reason,
+                    "CaseRootCauseCategory": selectedChatTopic.cause,
+                    "CaseRootCauseSubCategory": selectedChatTopic.subcause 
+                    
+                });
+                console.log("Recieved Messaging Event--- outside onEmbeddedMessagingReady");
+            });
+            }; 
+            
+             function processSelectedTopic(){
+                var selectBox = document.getElementById("chat_topic");
+                var selectedValue = selectBox.options[selectBox.selectedIndex].value;	 
+                selectedChatTopic = chatFormValues[selectedValue];
+                     
+                    if(selectedChatTopic){                                            // We handle only what was selected if blank do nothing	    	
+                    if (selectedChatTopic.chat == "Y"){		    	
+                    prepareChatParams(selectedChatTopic);
+                   
+                    console.log("selectedChatTopic----",selectedChatTopic);
+                         initEmbeddedMessaging();  
+                        
+                  
+
+                     window.addEventListener("onEmbeddedMessagingBusinessHoursEnded",(event)=>{
+                     console.log("Outside of Business hours");
+                    isBusinessHrs=true;
+                          document.getElementById("cht_agt_unavail").style.display ="block";
+                         document.getElementById("chat_button").disabled = true;
+                          document.getElementById("chat_topic").disabled = true;
+                         document.getElementById("chat_privacy").style.display ="none";
+                      });  
+                   
+                    document.getElementById("chat_button").disabled =false;
+                 
+                    
+                } 
+                }
+                
+                };  
+                    
+            
+            function lauchChatFun(){
+                     document.getElementById("chat_button").disabled = true;
+                     document.getElementById("chat_topic").disabled = true;
+                if(isBusinessHrs!=true){
+                console.log("Loading Messaging now");
+                setTimeout(() => {
+                    embeddedservice_bootstrap.utilAPI
+                    .launchChat()
+                    .then(() => {
+                    
+                    console.log("Inside Launch Chat");
+                }).catch(() => {
+                    console.log("Inside Launch Chat catch Block");
+                }).finally(() => {
+                    
+                    console.log("Inside Launch Chat finally Block");
+                });
+                }, 2000);
+                    
+             } 
+                        
+
+                };
+                    
+                    
+                    // this is called at load time
+             function disableAgentMessage(){  
+                    document.getElementById("cht_agt_unavail").style.display = "none";	
+                    document.getElementById("chat_contact").style.display = "none";
+                };
+                    
+       </script>
+            
+            
+        </head>
+        
+        <BODY class="body-white" onLoad="disableAgentMessage();" onUnload = "close();">
+            <div id="chat_div_id"><!-- DO NOT REMOVE THIS. It is here to simulate agent availibility for API --></div>
+            <span style="display:block; height: 19px;"></span>
+            <div class="col-lg-12 ">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="panel panel-orange">
+                        <div class="panel-heading title-blue">
+                            How can we help you?
+                        </div>
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    <td><label class="control-label" >I want to</label> &nbsp;</td>
+                                    <td><select id='chat_topic' 
+                                                class="form-control" onClick="processSelectedTopic()">
+                                        <option value=""></option>
+                                        
+                                        <option
+                                                value="8">
+                                            Cooler Return Process
+                                        </option>
+                                        
+                                        <option
+                                                value="25">
+                                            Customer Communication
+                                        </option>
+                                        
+                                        <option
+                                                value="23">
+                                            Delete orders
+                                        </option>
+                                        
+                                        <option
+                                                value="3">
+                                            Delivery Days Inquiry
+                                        </option>
+                                        
+                                        <option
+                                                value="2">
+                                            Delivery ETA
+                                        </option>
+                                        
+                                        <option
+                                                value="1">
+                                            Invoice&#x2f;Credit Memo Request
+                                        </option>
+                                        
+                                        <option
+                                                value="22">
+                                            Modify orders
+                                        </option>
+                                        
+                                        <option
+                                                value="4">
+                                            Order Unlock
+                                        </option>
+                                        
+                                        <option
+                                                value="5">
+                                            PharmaClik Feedback&#x2f;Enhancements
+                                        </option>
+                                        
+                                        <option
+                                                value="6">
+                                            PharmaClik Support
+                                        </option>
+                                        
+                                        <option
+                                                value="21">
+                                            Place order
+                                        </option>
+                                        
+                                        <option
+                                                value="26">
+                                            Price stickers
+                                        </option>
+                                        
+                                        <option
+                                                value="27">
+                                            Return Paper Work
+                                        </option>
+                                        
+                                        <option
+                                                value="7">
+                                            Return Policy Inquiry
+                                        </option>
+                                        
+                                        <option
+                                                value="24">
+                                            Return Services
+                                        </option>
+                                        
+                                        <option
+                                                value="28">
+                                            Ship Memo &#x2f; POD
+                                        </option>
+                                        
+                                        <option
+                                                value="29">
+                                            Statement
+                                        </option>
+                                        
+                                        <option
+                                                value="9">
+                                            Stock Availability
+                                        </option>
+                                        
+                                        <option
+                                                value="10">
+                                            Other - Contact Customer Service
+                                        </option>
+                                        
+                                        </select></td>
+                                </tr>
+                            </table>
+                            <div class="pull-right">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="control-group">
+                                                <div>
+                                                    <button id="cancel_button" type="button" class="btn btn-default" onClick="window.close();">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="control-group">
+                                                <div>
+                                                    <button id="chat_button" type="button" disabled="true" class="btn btn-default"  onclick="lauchChatFun()">
+                                                        Chat
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 ">
+                <div class="col-xs-12 col-sm-12">
+                    <div id="chat_privacy">
+                        <label for="chat_privacy">When using the PharmaClik Chat feature, please do not include any personal information in the chat discussion. For any questions regarding how McKesson Canada Corporation handles your personal information, please visit https://www.mckesson.ca/en/privacy
+                        </label>				
+                    </div>
+                    <div id="cht_agt_unavail">
+                        <label for="chat_agent_unavail">Thank you for contacting McKesson Canada. If you are contacting us during regular business hours, please try us again in a few minutes and we will be happy to assist you with your inquiries as all agents are currently busy assisting other customers. If it&#39;s outside of our regular business hours, please try us again during business hours and we will be happy to assist you with your inquiries.</label>
+                    </div>
+                    <div id="chat_contact">
+                        <label for="chat_other_lbl">For all other inquiries, please contact our Customer Service Team. A Customer Service Specialist will be happy to assist you. Our contact info can be found below</label>
+                        <div class="card card-grey">
+                            <div class="card-header">
+                                <!-- Start CANAB2B-7068 --> 
+                                
+                                McKesson DEMO
+                                <!-- END CANAB2B-7068 -->
+                            </div>
+                            <div class="card-body table-responsive rounded-1 ">
+                                <TABLE class="table table-bordered">	
+                                    <tr>		             
+                                        <TH colspan="2"> Account Management,  
+                                            qa admin
+                                            
+                                        </TH>
+                                    </tr>  
+                                    <TR> 
+                                        <TD   width="30%"><b>Fax</b></TD> 
+                                        <TD width="60%">null</TD>
+                                        
+                                    </TR>                                   
+                                    <TR>
+                                        <TD   valign="top" width="30%"> <b>Address</b></TD>
+                                        <TD width="60%">
+                                            <!-- Start CANAB2B-7068 -->
+                                            RETAIL&#xd;&#xa;Atl 1.866.604.4595&#xd;&#xa;Que 514.593.1789 or 1.800.363.5969&#xd;&#xa;Ont 905.671.1359 or 1.888.737.7780&#xd;&#xa;Western 1.800.667.9299&#xd;&#xa;&#xd;&#xa;HOSPITALS&#xd;&#xa;Atl 1.866.325.7883&#xd;&#xa;Que 514.593.2277 or 1.800.363.7139x2277&#xd;&#xa;Ont 1.800.576.2380&#xd;&#xa;Western 1.800.661.9932
+                                            <!-- END CANAB2B-7068 -->	    	 			
+                                        </TD>	    
+                                    </TR>
+                                    <tr>
+                                        <td   colspan="2">     
+                                        </td>    
+                                    </tr>
+                                </TABLE>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </BODY>
+    </html>
